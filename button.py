@@ -1,5 +1,8 @@
 import pygame
 
+#custom event
+Timer = pygame.USEREVENT + 1
+
 #button class
 class Button():
 	def __init__(self, x, y, image, scale):
@@ -11,7 +14,7 @@ class Button():
 		self.clicked = False
 		self.is_visible = False
 
-	def draw(self, surface):
+	def draw(self, surface, can_click):
 		if not self.is_visible:
 			return False
 		action = False
@@ -19,8 +22,9 @@ class Button():
 		pos = pygame.mouse.get_pos()
 
 		#check mouseover and clicked conditions
-		if self.rect.collidepoint(pos):
+		if self.rect.collidepoint(pos) and can_click:
 			if pygame.mouse.get_pressed()[0] == 1 and self.clicked == False:
+				pygame.time.set_timer(Timer, 500, 1)
 				self.clicked = True
 				action = True
 

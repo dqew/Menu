@@ -56,7 +56,9 @@ mute_menu_music_button = button.Button (350, 473, mute_menu_music_img, 1)
 
 #game loop
 run = True
+can_click = True
 while run:
+  print(can_click)
 
   event_list = pygame.event.get()
   for event in event_list:
@@ -65,6 +67,8 @@ while run:
         game_paused = True
     if event.type == pygame.QUIT:
       run = False
+    if event.type == button.Timer:
+      can_click = True
 
   screen.blit(bg_img,(0,0))
 
@@ -88,12 +92,15 @@ while run:
 
 
       #draw pause screen butttons
-      if start_button.draw(screen):
+      if start_button.draw(screen, can_click):
         game_paused = True
-      if options_button.draw(screen):
+        can_click = False
+      if options_button.draw(screen, can_click):
         menu_state = "options"
-      if quit_button.draw(screen):
+        can_click = False
+      if quit_button.draw(screen, can_click):
         run = False
+        can_click = False
     #check if the options menu is open
     if menu_state == "options":
       audio_button.is_visible = True
@@ -105,14 +112,19 @@ while run:
       mute_menu_music_button.is_visible = False
       
       #draw the different options buttons
-      if controls_button.draw(screen):
+      if controls_button.draw(screen, can_click):
         print("Controls")
-      if audio_button.draw(screen):
+        can_click = False
+      if audio_button.draw(screen, can_click):
         menu_state = "Audio"
-      if Video_settings_Button.draw(screen):
+        print("Audio")
+        can_click = False
+      if Video_settings_Button.draw(screen, can_click):
         print("Video settings")
-      if back_button.draw(screen):
+        can_click = False
+      if back_button.draw(screen, can_click):
         menu_state = "main"
+        can_click = False
     #check if the controls menu is open **TO DO**
 
     #check if the audio menu is open
@@ -130,7 +142,9 @@ while run:
 
 
       #draw the different audio options buttons
-      if mute_menu_music_button.draw(screen):
+      if mute_menu_music_button.draw(screen, can_click):
+        print("muted")
+        can_click = False
         pygame.mixer.music.pause()
 
       
