@@ -67,18 +67,17 @@ while run:
   screen.blit(bg_img,(0,0))
 
 
-  if menu_state == "options":
-    audio_button.is_visible = True
-    mute_menu_music_button.is_visible = False
 
-  if menu_state == "Audio":
-   audio_button.is_visible = False
-   mute_menu_music_button.is_visible = True
+
+
 
   #check if game is paused
   if game_paused == True:
     #check menu state
     if menu_state == "main":
+      start_button.is_visible = True
+      options_button.is_visible = True
+      quit_button.is_visible = True
       #draw pause screen butttons
       if start_button.draw(screen):
         game_paused = False
@@ -89,6 +88,11 @@ while run:
     #check if the options menu is open
     if menu_state == "options":
       audio_button.is_visible = True
+      controls_button.is_visible = True
+      Video_settings_Button.is_visible = True
+      back_button.is_visible = True
+      
+
       #draw the different options buttons
       if controls_button.draw(screen):
         print("Controls")
@@ -102,9 +106,13 @@ while run:
 
     #check if the audio menu is open
     if menu_state == "Audio":
+      mute_menu_music_button = True
+
       #draw the different audio options buttons
       if mute_menu_music_button.draw(screen):
         pygame.mixer.music.pause()
+
+      
 
     pygame.display.update()
 
