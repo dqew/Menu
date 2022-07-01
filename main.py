@@ -78,9 +78,16 @@ while run:
       start_button.is_visible = True
       options_button.is_visible = True
       quit_button.is_visible = True
+      audio_button.is_visible = False
+      controls_button.is_visible = False
+      Video_settings_Button.is_visible = False
+      back_button.is_visible = False
+      mute_menu_music_button.is_visible = False
+
+
       #draw pause screen butttons
       if start_button.draw(screen):
-        game_paused = False
+        game_paused = True
       if options_button.draw(screen):
         menu_state = "options"
       if quit_button.draw(screen):
@@ -91,8 +98,10 @@ while run:
       controls_button.is_visible = True
       Video_settings_Button.is_visible = True
       back_button.is_visible = True
+      start_button.is_visible = False
+      quit_button.is_visible = False
+      mute_menu_music_button = False
       
-
       #draw the different options buttons
       if controls_button.draw(screen):
         print("Controls")
@@ -106,7 +115,17 @@ while run:
 
     #check if the audio menu is open
     if menu_state == "Audio":
-      mute_menu_music_button = True
+      mute_menu_music_button.is_visible = True
+      
+      #other buttons cant be seen
+      audio_button.is_visible = False
+      controls_button.is_visible = False
+      Video_settings_Button.is_visible = False
+      back_button.is_visible = False
+      start_button.is_visible = False
+      quit_button.is_visible = False
+      options_button = False
+
 
       #draw the different audio options buttons
       if mute_menu_music_button.draw(screen):
