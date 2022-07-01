@@ -1,5 +1,5 @@
-import button
 import pygame
+import button
 
 pygame.init()
 
@@ -56,13 +56,30 @@ mute_menu_music_button = button.Button (350, 473, mute_menu_music_img, 1)
 run = True
 while run:
 
+  event_list = pygame.event.get()
+  for event in event_list:
+    if event.type == pygame.KEYDOWN:
+      if event.key == pygame.K_SPACE:
+        game_paused = True
+    if event.type == pygame.QUIT:
+      run = False
+
   screen.blit(bg_img,(0,0))
+
+
+  if menu_state == "options":
+    audio_button.is_visible = True
+    mute_menu_music_button.is_visible = False
+
+  if menu_state == "Audio":
+   audio_button.is_visible = False
+   mute_menu_music_button.is_visible = True
 
   #check if game is paused
   if game_paused == True:
     #check menu state
     if menu_state == "main":
-      #draw pause screen buttons
+      #draw pause screen butttons
       if start_button.draw(screen):
         game_paused = False
       if options_button.draw(screen):
@@ -71,6 +88,7 @@ while run:
         run = False
     #check if the options menu is open
     if menu_state == "options":
+      audio_button.is_visible = True
       #draw the different options buttons
       if controls_button.draw(screen):
         print("Controls")
@@ -84,20 +102,11 @@ while run:
 
     #check if the audio menu is open
     if menu_state == "Audio":
-      #draw the different audio option buttons
+      #draw the different audio options buttons
       if mute_menu_music_button.draw(screen):
         pygame.mixer.music.pause()
 
-  
+    pygame.display.update()
 
-  #event handler
-  for event in pygame.event.get():
-    if event.type == pygame.KEYDOWN:
-      if event.key == pygame.K_SPACE:
-        game_paused = True
-    if event.type == pygame.QUIT:
-      run = False
-
-  pygame.display.update()
 
 pygame.quit()
