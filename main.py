@@ -7,14 +7,16 @@ pygame.init()
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 
-bg_img = pygame.image.load("D:\Python\Projects\Second_menu\yper_saber_no_buttons.png")
+asset_dir = ".\\assets\\"
+
+bg_img = pygame.image.load(f"{asset_dir}yper_saber_no_buttons.png")
 bg_img = pygame.transform.scale(bg_img,(SCREEN_WIDTH, SCREEN_HEIGHT))
 
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("Main Menu")
 
 pygame.mixer.init()
-pygame.mixer.music.load("D:\Python\Projects\main_menu\High_Contrast_-_If_We_Ever.wav")
+pygame.mixer.music.load(f"{asset_dir}High_Contrast_-_If_We_Ever.wav")
 pygame.mixer.music.play(loops=-1)
 
 #game variables
@@ -29,15 +31,15 @@ font = pygame.font.SysFont("arialblack", 40)
 TEXT_COL = (255, 255, 255)
 
 #load button images
-start_img = pygame.image.load("D:\Python\Projects\Second_menu\Start_Button.png").convert_alpha()
-options_img = pygame.image.load("D:\Python\Projects\Second_menu\Options_Button.png").convert_alpha()
-quit_img = pygame.image.load("D:\Python\Projects\second_menu\Quit_Button.png").convert_alpha()
-controls_img = pygame.image.load("D:\Python\Projects\second_menu\Controls_Button.png").convert_alpha()
-audio_img = pygame.image.load("D:\Python\Projects\second_menu\Audio_Button.png").convert_alpha()
-video_settings_img = pygame.image.load("D:\Python\Projects\Second_menu\Video_settings_Button.png").convert_alpha()
-mute_menu_music_img = pygame.image.load("D:\Python\Projects\Second_menu\Mute_menu_music_Button.png").convert_alpha()
+start_img = pygame.image.load(f"{asset_dir}Start_Button.png").convert_alpha()
+options_img = pygame.image.load(f"{asset_dir}Options_Button.png").convert_alpha()
+quit_img = pygame.image.load(f"{asset_dir}Quit_Button.png").convert_alpha()
+controls_img = pygame.image.load(f"{asset_dir}Controls_Button.png").convert_alpha()
+audio_img = pygame.image.load(f"{asset_dir}Audio_Button.png").convert_alpha()
+video_settings_img = pygame.image.load(f"{asset_dir}Video_settings_Button.png").convert_alpha()
+mute_menu_music_img = pygame.image.load(f"{asset_dir}Mute_menu_music_Button.png").convert_alpha()
 
-back_img = pygame.image.load("D:\Python\Projects\second_menu\Back_Button.png").convert_alpha()
+back_img = pygame.image.load(f"{asset_dir}Back_Button.png").convert_alpha()
 
 #create button instances
 start_button = button.Button(328, 380, start_img, 1)
@@ -100,7 +102,7 @@ while run:
       back_button.is_visible = True
       start_button.is_visible = False
       quit_button.is_visible = False
-      mute_menu_music_button = False
+      mute_menu_music_button.is_visible = False
       
       #draw the different options buttons
       if controls_button.draw(screen):
@@ -124,7 +126,7 @@ while run:
       back_button.is_visible = False
       start_button.is_visible = False
       quit_button.is_visible = False
-      options_button = False
+      options_button.is_visible = False
 
 
       #draw the different audio options buttons
